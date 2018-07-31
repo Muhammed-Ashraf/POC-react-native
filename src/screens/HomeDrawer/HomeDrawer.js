@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, View, Platform, Image } from 'react-native';
+
+import DrawerItem from '../../components/DrawerItem/DrawerItem';
 
 import styles from './homeDrawerStyle';
+
+const imageSource = require('../../assets/banner-drawer.jpg');
 
 class SideMenu extends Component {
     navigateToScreen = (route) => () => {
@@ -16,22 +20,35 @@ class SideMenu extends Component {
         const { navigation } = this.props;
         return (
             <View style={styles.container}>
+                <Image
+                    source={imageSource}
+                    style={styles.banner}
+                />
                 <ScrollView>
-                    <View>
-                        <View style={styles.navSectionStyle}>
+
+                    {/* <View style={styles.navSectionStyle}>
                             <Text style={styles.navItemStyle} onPress={() => navigation.navigate('Checkout')}>
                                 Checkout
                             </Text>
                         </View>
-                    </View>
-
-                    <View>
                         <View style={styles.navSectionStyle}>
                             <Text style={styles.navItemStyle} onPress={() => navigation.navigate('AddInventory')}>
                                 Add Inventory
                             </Text>
-                        </View>
-                    </View>
+                        </View> */}
+
+                    <DrawerItem
+                        onPressed={() => navigation.navigate('Checkout')}
+                        title='Checkout'
+                        icon={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'
+                        }
+                    />
+                    <DrawerItem
+                        onPressed={() => navigation.navigate('AddInventory')}
+                        title=' Add Inventory'
+                        icon={Platform.OS === 'android' ? 'md-add' : 'ios-add'}
+                    />
+
                 </ScrollView>
             </View>
         );
