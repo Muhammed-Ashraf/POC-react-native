@@ -1,33 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, StatusBar, Image, Alert, TouchableHighlight } from 'react-native';
+import { View, Text, StatusBar } from 'react-native';
 
 import styles from './checkoutStyle';
+import HeaderBar from '../../components/HeaderBar/HeaderBar';
 
-const menuicon = require('../../assets/icon-menu.png');
+const logo = require('../../assets/logo-next-billion-grey.png');
 
-class HomeScreen extends Component {
-    static navigationOptions = {
-        title: 'Checkout',
-        headerStyle: {
-            backgroundColor: 'white',
-        },
-        headerTintColor: 'grey',
-        headerTitleStyle: {
-            textAlign: 'center',
-            alignSelf: 'center'
-        },
+class CheckoutScreen extends Component {
 
-
-        headerLeft: (
-            <TouchableHighlight onPress={() => Alert.alert('adad', 'qdqdqd')}>
-                <Image source={menuicon} />
-            </TouchableHighlight>
-
-        ),
-
-        headerRight: (<View />)
-
-    };
+    onMenuPressed = () => {
+        this.props.navigation.openDrawer();
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -35,10 +18,11 @@ class HomeScreen extends Component {
                     barStyle="light-content"
                     backgroundColor="black"
                 />
+                <HeaderBar onMenuPressed={() => this.onMenuPressed()} title='Checkout' logo={logo} />
                 <Text onPress={() => this.props.navigation.openDrawer()}>Checkout</Text>
 
             </View>
         );
     }
 }
-export default HomeScreen; 
+export default CheckoutScreen; 
