@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { View, Text, StatusBar } from 'react-native';
-import HeaderBar from '../../components/HeaderBar/HeaderBar';
+import { connect } from 'react-redux';
 
+import HeaderBar from '../../components/HeaderBar/HeaderBar';
 import styles from './AddInventoryStyle';
+import { getTotalInventoryList } from '../../store/actions/index';
 
 const logo = require('../../assets/logo-next-billion-white.png');
 
 class AddInventoryScreen extends Component {
+
+
+    componentWillMount() {
+        this.props.onLoadList();
+    }
 
     onMenuPressed = () => {
         this.props.navigation.openDrawer();
@@ -26,4 +33,18 @@ class AddInventoryScreen extends Component {
         );
     }
 }
-export default AddInventoryScreen;
+
+const mapStateToProps = state => {
+    return {
+        inventoryList: state.inventoryList.inventoryList
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onLoadList: () => dispatch(getTotalInventoryList())
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddInventoryScreen);
+
