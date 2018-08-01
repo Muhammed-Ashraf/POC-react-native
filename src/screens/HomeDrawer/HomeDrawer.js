@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
-import { ScrollView, View, Platform, Image } from 'react-native';
+import { ScrollView, View, Platform, ImageBackground, Text, Image } from 'react-native';
 
 import DrawerItem from '../../components/DrawerItem/DrawerItem';
 
 import styles from './homeDrawerStyle';
 
-const imageSource = require('../../assets/banner-drawer.jpg');
+const banner = require('../../assets/banner-drawer.jpg');
+const dummyPic = require('../../assets/dummy-photo.png');
 
 class SideMenu extends Component {
     navigateToScreen = (route) => () => {
@@ -20,10 +21,17 @@ class SideMenu extends Component {
         const { navigation } = this.props;
         return (
             <View style={styles.container}>
-                <Image
-                    source={imageSource}
+                <ImageBackground
+                    source={banner}
                     style={styles.banner}
-                />
+                >
+                    <Image
+                        source={dummyPic}
+                        style={styles.profilePic}
+                    />
+                    <Text style={[styles.email, { marginBottom: 4 }]}>Charlie Austin</Text>
+                    <Text style={styles.email}>austin@gmail.com</Text>
+                </ImageBackground>
                 <ScrollView>
 
                     {/* <View style={styles.navSectionStyle}>
@@ -50,7 +58,7 @@ class SideMenu extends Component {
                     />
 
                 </ScrollView>
-            </View>
+            </View >
         );
     }
 }
