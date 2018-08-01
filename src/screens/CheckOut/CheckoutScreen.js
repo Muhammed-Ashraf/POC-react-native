@@ -4,7 +4,7 @@ import { View, Text, StatusBar } from 'react-native';
 import styles from './checkoutStyle';
 import HeaderBar from '../../components/HeaderBar/HeaderBar';
 
-const logo = require('../../assets/logo-next-billion-grey.png');
+const logo = require('../../assets/logo-next-billion-white.png');
 
 class CheckoutScreen extends Component {
 

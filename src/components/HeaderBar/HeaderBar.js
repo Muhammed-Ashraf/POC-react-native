@@ -10,7 +10,7 @@ const headerBar = props => (
                 <Icon
                     size={35}
                     name={Platform.OS === 'android' ? 'menu' : 'menu'}
-                    color="#747474"
+                    color='white'
                 />
             </View>
         </TouchableOpacity>
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         elevation: 4,
         height: 55,
         flexDirection: 'row',
-        backgroundColor: 'white',
+        backgroundColor: '#1d2029',
         alignItems: 'center'
     },
     menuButton: {
@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
     title: {
         marginLeft: 8,
         fontSize: 20,
-        flex: 1
+        flex: 1,
+        color: 'white'
     },
     logoImage: {
         width: 100,
