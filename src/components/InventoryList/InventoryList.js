@@ -1,69 +1,53 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 
+import InventoryListItem from '../InventoryListItem/InventoryListItem';
+import InventoryListHeading from '../InventoryListHeading/InventoryListHeading';
+
 const inventoryList = props => (
     <View style={styles.container}>
-        <View style={styles.heading}>
-            <Text style={[styles.headingText, { marginLeft: 16 }]}>Product</Text>
-            <Text style={styles.headingText}>Value</Text>
-            <Text style={[styles.headingText, { marginRight: 16 }]}>Unit</Text>
-        </View>
+        <InventoryListHeading />
         <FlatList
-            ItemSeparatorComponent={this.flatListSeparator}
-            data={[{ title: 'Knorr - 7g', unit: '20', value: '$5.55' },
-            { title: 'Knorr - 14g', unit: '20', value: '$5.55' },
-            { title: 'Knorr - 28g', unit: '20', value: '$5.55' },
-            { title: 'Clear - 5ml', unit: '20', value: '$5.55' },
-            { title: 'Clear - 5ml', unit: '20', value: '$5.55' },
-            { title: 'Knorr - 7g', unit: '20', value: '$5.55' },
-            { title: 'Surf - 100g', unit: '20', value: '$5.55' },
-            { title: 'Knorr - 7g', unit: '20', value: '$5.55' },
-            { title: 'Pepsi - 1l', unit: '20', value: '$5.55' }
+            ItemSeparatorComponent={this.renderSeparator}
+            data={[{ name: 'Knorr - 7g', unit: '20', value: '$5.55', color: 'red' },
+            { name: 'Knorr - 14g', unit: '20', value: '$5.55', color: 'red' },
+            { name: 'Knorr - 28g', unit: '20', value: '$5.55', color: 'red' },
+            { name: 'Clear - 5ml', unit: '20', value: '$5.55', color: 'blue' },
+            { name: 'Clear - 5ml', unit: '20', value: '$5.55', color: 'blue' },
+            { name: 'Knorr - 7g', unit: '20', value: '$5.55', color: 'red' },
+            { name: 'Surf - 100g', unit: '20', value: '$5.55', color: 'orange' },
+            { name: 'Knorr - 7g', unit: '20', value: '$5.55', color: 'red' },
+            { name: 'Pepsi - 1l', unit: '20', value: '$5.55', color: 'green' }
             ]
             }
             renderItem={({ item }) =>
-                <View style={styles.cellContentViewStyle}>
-                    {(() => {
-                        switch (item.title.split('-')[0]) {
-                            case 'Knorr ':
-                                contentBackgroundColor = 'steelblue';
-                                break;
-                            case 'Clear ':
-                                contentBackgroundColor = '#747aed';
-                                break;
-                            case 'Surf ':
-                                contentBackgroundColor = '#ef735d';
-                                break;
-                            default: contentBackgroundColor = 'white';
-                        }
-                    })()}
-                    {console.log(contentBackgroundColor)}
-
-                    <Text style={styles.cellHeaderStyle} style={{ backgroundColor: contentBackgroundColor, borderWidth: 1, borderColor: 'black', borderRadius: 8, overflow: 'hidden', textAlign: 'center', height: 25, width: 100 }}>{item.title}</Text>
-                    <Text style={styles.cellHeaderStyle1}>{item.unit}</Text>
-                    <Text style={styles.cellHeaderStyle1}>{item.value}</Text>
-                </View>
+                <InventoryListItem
+                    color={item.color}
+                    name={item.name}
+                    value={item.value}
+                    unit={item.unit}
+                />
             }
             keyExtractor={(item, index) => index.toString()}
         />
 
     </View>
 );
+renderSeparator = () => {
+    return (
+        <View
+            style={{
+                height: 0.5,
+                backgroundColor: '#323337',
+            }}
+        />
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
 
-    },
-    heading: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        height: 45,
-        backgroundColor: '#1d2029',
-        justifyContent: 'space-between'
-    },
-    headingText: {
-        color: 'white'
     },
     cellHeaderStyle: {
         paddingLeft: '3%'
