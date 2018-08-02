@@ -10,12 +10,6 @@ const banner = require('../../assets/banner-drawer.jpg');
 const dummyPic = require('../../assets/dummy-photo.png');
 
 class SideMenu extends Component {
-    navigateToScreen = (route) => () => {
-        const navigateAction = NavigationActions.navigate({
-            routeName: route
-        });
-        this.props.navigation.dispatch(navigateAction);
-    }
 
     render() {
         const { navigation } = this.props;
@@ -34,17 +28,6 @@ class SideMenu extends Component {
                 </ImageBackground>
                 <ScrollView>
 
-                    {/* <View style={styles.navSectionStyle}>
-                            <Text style={styles.navItemStyle} onPress={() => navigation.navigate('Checkout')}>
-                                Checkout
-                            </Text>
-                        </View>
-                        <View style={styles.navSectionStyle}>
-                            <Text style={styles.navItemStyle} onPress={() => navigation.navigate('AddInventory')}>
-                                Add Inventory
-                            </Text>
-                        </View> */}
-
                     <DrawerItem
                         onPressed={() => {
                             navigation.navigate('Checkout');
@@ -56,12 +39,21 @@ class SideMenu extends Component {
                     />
                     <DrawerItem
                         onPressed={() => {
+                            navigation.navigate('ViewInventory');
+                            this.props.navigation.toggleDrawer();
+                        }}
+                        title='View Inventory'
+                        icon={Platform.OS === 'android' ? 'md-eye' : 'ios-eye'}
+                    />
+                    <DrawerItem
+                        onPressed={() => {
                             navigation.navigate('AddInventory');
                             this.props.navigation.toggleDrawer();
                         }}
-                        title=' Add Inventory'
+                        title='Add Inventory'
                         icon={Platform.OS === 'android' ? 'md-add' : 'ios-add'}
                     />
+
 
                 </ScrollView>
             </View >

@@ -2,6 +2,7 @@ import { DrawerNavigator } from 'react-navigation';
 
 import CheckoutScreen from '../screens/CheckOut/CheckoutScreen';
 import AddInventoryScreen from '../screens/AddInventory/AddInventoryScreen';
+import ViewInventoryScreen from '../screens/ViewInventory/ViewInventory';
 import SideMenu from '../screens/HomeDrawer/HomeDrawer';
 
 // export default DrawerNavigator(
@@ -16,19 +17,12 @@ import SideMenu from '../screens/HomeDrawer/HomeDrawer';
 const mainNavigator = DrawerNavigator({
   Checkout: {
     screen: CheckoutScreen,
-    // navigationOptions: {
-    //   header: {
-    //     title: 'TITLE',
-    //     titleStyle: {
-    //       color: 'black',
-    //       textAlign: 'center',
-    //       fontWeight: '500'
-    //     }
-    //   }
-    // }
   },
   AddInventory: {
     screen: AddInventoryScreen,
+  },
+  ViewInventory: {
+    screen: ViewInventoryScreen,
   }
 }, {
     contentComponent: SideMenu,

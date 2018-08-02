@@ -6,7 +6,7 @@ const drawerItem = props => (
 
 
     <TouchableOpacity style={styles.container} onPress={props.onPressed}>
-        <View >
+        <View style={styles.iconContainer}>
             <Icon
                 size={30}
                 name={props.icon}
@@ -25,8 +25,14 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignItems: 'center'
     },
+    iconContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 45,
+        height: 45
+    },
     title: {
-        marginLeft: 24,
+        marginLeft: 16,
         fontSize: 15,
         flex: 1
     },

@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 import HeaderBar from '../../components/HeaderBar/HeaderBar';
 import InventoryList from '../../components/InventoryList/InventoryList';
 
-import styles from './AddInventoryStyle';
+import styles from './viewInventoryStyle';
 
 import { getTotalInventoryList } from '../../store/actions/index';
 
 const logo = require('../../assets/logo-next-billion-white.png');
 
-class AddInventoryScreen extends Component {
+class ViewInventoryScreen extends Component {
 
 
     componentWillMount() {
@@ -29,7 +29,7 @@ class AddInventoryScreen extends Component {
                     barStyle="light-content"
                     backgroundColor="black"
                 />
-                <HeaderBar onMenuPressed={() => this.onMenuPressed()} title='Add Inventory' logo={logo} />
+                <HeaderBar onMenuPressed={() => this.onMenuPressed()} title='View Inventory' logo={logo} />
                 <InventoryList />
 
             </View>
@@ -49,5 +49,5 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddInventoryScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ViewInventoryScreen);
 
