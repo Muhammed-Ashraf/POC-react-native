@@ -27,7 +27,7 @@ class AddInventoryScreen extends Component {
                     backgroundColor="black"
                 />
                 <HeaderBar onMenuPressed={() => this.onMenuPressed()} title='Add Inventory' logo={logo} />
-                <Text onPress={() => this.props.navigation.openDrawer()}>Add Inventory</Text>
+                
 
             </View>
         );

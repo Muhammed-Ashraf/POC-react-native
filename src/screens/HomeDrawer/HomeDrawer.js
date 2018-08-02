@@ -46,13 +46,19 @@ class SideMenu extends Component {
                         </View> */}
 
                     <DrawerItem
-                        onPressed={() => navigation.navigate('Checkout')}
+                        onPressed={() => {
+                            navigation.navigate('Checkout');
+                            this.props.navigation.toggleDrawer();
+                        }}
                         title='Checkout'
                         icon={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'
                         }
                     />
                     <DrawerItem
-                        onPressed={() => navigation.navigate('AddInventory')}
+                        onPressed={() => {
+                            navigation.navigate('AddInventory');
+                            this.props.navigation.toggleDrawer();
+                        }}
                         title=' Add Inventory'
                         icon={Platform.OS === 'android' ? 'md-add' : 'ios-add'}
                     />

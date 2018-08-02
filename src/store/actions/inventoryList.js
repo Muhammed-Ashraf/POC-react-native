@@ -1,8 +1,11 @@
 
 import { SET_INVENTORY_LIST } from './actionTypes';
+import { uiStartLoading, uiStopLoading } from './index';
+
 
 export const getTotalInventoryList = () => {
     return dispatch => {
+        dispatch(uiStartLoading());
         const url = 'http://52.230.124.246:60823/saas6updated/mobile/product';
 
         fetch(url, {
@@ -36,7 +39,15 @@ export const getTotalInventoryList = () => {
                     });
                 }
                 console.log(list);
-                // dispatch(setPlaces(places));
+                dispatch(setInventoryList(list));
+                dispatch(uiStopLoading());
             });
+    };
+};
+
+export const setInventoryList = products => {
+    return {
+        type: SET_INVENTORY_LIST,
+        inventoryList: products
     };
 };

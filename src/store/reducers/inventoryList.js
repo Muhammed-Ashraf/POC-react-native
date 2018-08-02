@@ -1,9 +1,6 @@
-// import {
-//   SET_PLACES,
-//   REMOVE_PLACE,
-//   PLACE_ADDED,
-//   START_ADD_PLACE
-// } from "../actions/actionTypes";
+import {
+    SET_INVENTORY_LIST
+} from '../actions/actionTypes';
 
 const initialState = {
     inventoryList: [],
@@ -11,6 +8,11 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case SET_INVENTORY_LIST:
+            return {
+                ...state,
+                inventoryList: action.inventoryList
+            };
         default:
             return state;
     }
