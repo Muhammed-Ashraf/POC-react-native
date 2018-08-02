@@ -9,17 +9,18 @@ const inventoryList = props => (
         <InventoryListHeading />
         <FlatList
             ItemSeparatorComponent={this.renderSeparator}
-            data={[{ name: 'Knorr - 7g', unit: '20', value: '$5.55', color: 'red' },
-            { name: 'Knorr - 14g', unit: '20', value: '$5.55', color: 'red' },
-            { name: 'Knorr - 28g', unit: '20', value: '$5.55', color: 'red' },
-            { name: 'Clear - 5ml', unit: '20', value: '$5.55', color: 'blue' },
-            { name: 'Clear - 5ml', unit: '20', value: '$5.55', color: 'blue' },
-            { name: 'Knorr - 7g', unit: '20', value: '$5.55', color: 'red' },
-            { name: 'Surf - 100g', unit: '20', value: '$5.55', color: 'orange' },
-            { name: 'Knorr - 7g', unit: '20', value: '$5.55', color: 'red' },
-            { name: 'Pepsi - 1l', unit: '20', value: '$5.55', color: 'green' }
-            ]
-            }
+            // data={[{ name: 'Knorr - 7g', unit: '20', value: '$5.55', color: 'red' },
+            // { name: 'Knorr - 14g', unit: '20', value: '$5.55', color: 'red' },
+            // { name: 'Knorr - 28g', unit: '20', value: '$5.55', color: 'red' },
+            // { name: 'Clear - 5ml', unit: '20', value: '$5.55', color: 'blue' },
+            // { name: 'Clear - 5ml', unit: '20', value: '$5.55', color: 'blue' },
+            // { name: 'Knorr - 7g', unit: '20', value: '$5.55', color: 'red' },
+            // { name: 'Surf - 100g', unit: '20', value: '$5.55', color: 'orange' },
+            // { name: 'Knorr - 7g', unit: '20', value: '$5.55', color: 'red' },
+            // { name: 'Pepsi - 1l', unit: '20', value: '$5.55', color: 'green' }
+            // ]
+            // }
+            data={props.inventoryList}
             renderItem={({ item }) =>
                 <InventoryListItem
                     color={item.color}

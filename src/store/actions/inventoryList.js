@@ -31,6 +31,7 @@ export const getTotalInventoryList = () => {
                 const list = [];
                 for (let i = 0; i < products.length; i++) {
                     list.push({
+                        name: products[i].name,
                         unit: products[i].unit,
                         value: products[i].value,
                         color: products[i].color,

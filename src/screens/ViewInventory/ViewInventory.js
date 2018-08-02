@@ -30,7 +30,7 @@ class ViewInventoryScreen extends Component {
                     backgroundColor="black"
                 />
                 <HeaderBar onMenuPressed={() => this.onMenuPressed()} title='View Inventory' logo={logo} />
-                <InventoryList />
+                <InventoryList inventoryList={this.props.inventoryList} />
 
             </View>
         );
@@ -39,7 +39,8 @@ class ViewInventoryScreen extends Component {
 
 const mapStateToProps = state => {
     return {
-        inventoryList: state.inventoryList.inventoryList
+        inventoryList: state.inventoryList.inventoryList,
+        isLoading: state.ui.isLoading
     };
 };
 
