@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import HeaderBar from '../../components/HeaderBar/HeaderBar';
 import InventoryList from '../../components/InventoryList/InventoryList';
+import InventoryTotal from '../../components/InventoryTotal/InventoryTotal';
 
 import styles from './viewInventoryStyle';
 
@@ -30,6 +31,7 @@ class ViewInventoryScreen extends Component {
                     backgroundColor="black"
                 />
                 <HeaderBar onMenuPressed={() => this.onMenuPressed()} title='View Inventory' logo={logo} />
+                <InventoryTotal unit='300' value='1000' />
                 <InventoryList inventoryList={this.props.inventoryList} />
 
             </View>
