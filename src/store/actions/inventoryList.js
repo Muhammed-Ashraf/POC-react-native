@@ -1,4 +1,3 @@
-
 import { SET_INVENTORY_LIST } from './actionTypes';
 import { uiStartLoading, uiStopLoading } from './index';
 
