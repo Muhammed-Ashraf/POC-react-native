@@ -4,6 +4,8 @@ import {
 
 const initialState = {
     inventoryList: [],
+    unit: 0,
+    value: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -11,7 +13,9 @@ const reducer = (state = initialState, action) => {
         case SET_INVENTORY_LIST:
             return {
                 ...state,
-                inventoryList: action.inventoryList
+                inventoryList: action.inventoryList,
+                unit: action.unit,
+                value: action.value
             };
         default:
             return state;

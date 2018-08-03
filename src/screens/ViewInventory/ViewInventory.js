@@ -31,7 +31,7 @@ class ViewInventoryScreen extends Component {
                     backgroundColor="black"
                 />
                 <HeaderBar onMenuPressed={() => this.onMenuPressed()} title='View Inventory' logo={logo} />
-                <InventoryTotal unit='300' value='1000' />
+                <InventoryTotal unit={this.props.totalUnits} value={this.props.totalValue} />
                 <InventoryList inventoryList={this.props.inventoryList} />
 
             </View>
@@ -42,6 +42,8 @@ class ViewInventoryScreen extends Component {
 const mapStateToProps = state => {
     return {
         inventoryList: state.inventoryList.inventoryList,
+        totalUnits: state.inventoryList.unit,
+        totalValue: state.inventoryList.value,
         isLoading: state.ui.isLoading
     };
 };

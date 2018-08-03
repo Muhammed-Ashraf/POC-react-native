@@ -29,6 +29,8 @@ export const getTotalInventoryList = () => {
             })
             .then(products => {
                 const list = [];
+                let unit = 0;
+                let value = 0;
                 for (let i = 0; i < products.length; i++) {
                     list.push({
                         name: products[i].name,
@@ -37,17 +39,29 @@ export const getTotalInventoryList = () => {
                         color: products[i].color,
                         id: products[i].id,
                     });
+
+                    unit = products.reduce((cnt, product) => {
+                        return cnt + parseInt(product.unit, 10);
+                    }, 0);
+
+                    value = products.reduce((cnt, product) => {
+                        return cnt + parseInt(product.value, 10);
+                    }, 0);
                 }
                 console.log(list);
-                dispatch(setInventoryList(list));
+                console.log(unit);
+                console.log(value);
+                dispatch(setInventoryList(list, unit, value));
                 dispatch(uiStopLoading());
             });
     };
 };
 
-export const setInventoryList = products => {
+export const setInventoryList = (products, unt, val) => {
     return {
         type: SET_INVENTORY_LIST,
-        inventoryList: products
+        inventoryList: products,
+        unit: unt,
+        value: val
     };
 };
