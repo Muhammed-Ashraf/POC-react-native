@@ -1,4 +1,4 @@
-import { SET_INVENTORY_LIST } from './actionTypes';
+import { SET_INVENTORY_LIST, SET_QUERY } from './actionTypes';
 import { uiStartLoading, uiStopLoading } from './index';
 
 
@@ -63,5 +63,12 @@ export const setInventoryList = (products, unt, val) => {
         inventoryList: products,
         unit: unt,
         value: val
+    };
+};
+
+export const setQuery = (qry) => {
+    return {
+        type: SET_QUERY,
+        query: qry
     };
 };
