@@ -1,12 +1,13 @@
 import {
-    SET_INVENTORY_LIST, SET_QUERY
+    SET_INVENTORY_LIST, SET_QUERY, ADD_INVENTORY
 } from '../actions/actionTypes';
 
 const initialState = {
     inventoryList: [],
+    checkoutList: [],
     unit: 0,
     value: 0,
-    query: ''
+    query: '',
 };
 
 const reducer = (state = initialState, action) => {
@@ -24,6 +25,13 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 query: action.query
             };
+        case ADD_INVENTORY:
+        return {
+            ...state,
+            places: state.places.filter(place => {
+              return place.key !== action.key;
+            })
+          };
         default:
             return state;
     }

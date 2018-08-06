@@ -1,2 +1,2 @@
 export { uiStartLoading, uiStopLoading } from './ui';
-export { getTotalInventoryList } from './inventoryList';
+export { getTotalInventoryList, setQuery } from './inventoryList';

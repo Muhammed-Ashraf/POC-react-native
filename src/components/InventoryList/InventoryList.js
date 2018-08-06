@@ -29,7 +29,7 @@ const inventoryList = props => (
                     unit={item.unit}
                 />
             }
-            keyExtractor={(item, index) => index.toString()}
+            keyExtractor={(item) => item.name}
         />
 
     </View>
@@ -48,6 +48,7 @@ renderSeparator = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        height: 200
 
     },
     cellHeaderStyle: {

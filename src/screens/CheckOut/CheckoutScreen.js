@@ -6,17 +6,15 @@ import Autocomplete from 'react-native-autocomplete-input';
 import HeaderBar from '../../components/HeaderBar/HeaderBar';
 import InventoryList from '../../components/InventoryList/InventoryList';
 import InventoryTotal from '../../components/InventoryTotal/InventoryTotal';
-import AutoCompleteExample from '../AutoCompleteExample';
+import AutoCompleteExamle from '../AutoCompleteExample';
 
 import styles from './checkoutStyle';
 
-import { getTotalInventoryList } from '../../store/actions/index';
-import { setQuery } from '../../store/actions/inventoryList';
+import { getTotalInventoryList, setQuery } from '../../store/actions/index';
 
 const logo = require('../../assets/logo-next-billion-white.png');
 
 class CheckoutScreen extends Component {
-
 
     componentWillMount() {
         this.props.onLoadList();
@@ -26,46 +24,67 @@ class CheckoutScreen extends Component {
         this.props.navigation.openDrawer();
     }
 
-    findFilm(query) {
+    findProduct(query) {
         if (query === '') {
+            console.log('no query');
             return [];
         }
 
-        const { inventoryList } = this.props.inventoryList;
+        const inventoryList = this.props.inventoryList;
         const regex = new RegExp(`${query.trim()}`, 'i');
-        return inventoryList.filter(film => film.name.search(regex) >= 0);
+        filteredList = inventoryList.filter(inventory => inventory.name.search(regex) >= 0);
+        console.log(filteredList);
+        return inventoryList.filter(inventory => inventory.name.search(regex) >= 0);
+    }
+
+    renderList(inventoryTotal, inventoryList) {
+        return (
+            <View style={{ flex: 1 }}>
+                <InventoryTotal unit={this.props.totalUnits} value={this.props.totalValue} />
+                <InventoryList inventoryList={inventoryList} />
+            </View >
+        );
     }
 
     render() {
-        const { query } = this.props.query;
-        const inventoryList = this.findFilm(query);
+        const query = this.props.query;
+        console.log(query);
+        const inventoryList = this.findProduct(query);
         const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
         return (
-
             <View style={styles.container}>
                 <StatusBar
                     barStyle="light-content"
                     backgroundColor="black"
                 />
                 <HeaderBar onMenuPressed={() => this.onMenuPressed()} title='Checkout' logo={logo} />
-                <Autocomplete
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    containerStyle={styles.autocompleteContainer}
-                    data={inventoryList.length === 1 && comp(query, inventoryList[0].name) ? [] : inventoryList}
-                    defaultValue=''
-                    onChangeText={text => this.props.onQueryChange(text)}
-                    placeholder="Enter Star Wars film title"
-                    renderItem={({ name }) => (
-                        <TouchableOpacity onPress={() => this.props.onQueryChange(name)}>
-                            <Text style={styles.itemText}>
-                                {name}
-                            </Text>
-                        </TouchableOpacity>
-                    )}
-                />
-                {/* <InventoryTotal unit={this.props.totalUnits} value={this.props.totalValue} />
-                <InventoryList inventoryList={this.props.inventoryList} /> */}
+                <View style={{ flex: 1, paddingTop: 20 }}>
+                    <Autocomplete
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        containerStyle={styles.autocompleteContainer}
+                        data={inventoryList}
+                        defaultValue={query}
+                        onChangeText={text => this.props.onSearch(text)}
+                        placeholder="Search Product"
+                        renderItem={({ name }) => (
+                            <TouchableOpacity onPress={() => this.props.onSearch(name)}>
+                                <Text style={styles.itemText}>
+                                    {name}
+                                </Text>
+                            </TouchableOpacity>
+                        )}
+                    />
+                    <View style={styles.descriptionContainer}>
+                        {this.renderList(this.props.totalUnits, this.props.inventoryList)}
+                    </View>
+
+                </View>
+                <View style={styles.submitContainer}>
+                    <TouchableOpacity style={{ paddingRight: 16 }}>
+                        <Text style={{ color: 'white' }}>Submit</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
@@ -76,15 +95,15 @@ const mapStateToProps = state => {
         inventoryList: state.inventoryList.inventoryList,
         totalUnits: state.inventoryList.unit,
         totalValue: state.inventoryList.value,
-        isLoading: state.ui.isLoading,
-        query: state.inventoryList.query
+        query: state.inventoryList.query,
+        isLoading: state.ui.isLoading
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         onLoadList: () => dispatch(getTotalInventoryList()),
-        onQueryChange: (query) => dispatch(setQuery(query))
+        onSearch: (query) => dispatch(setQuery(query))
     };
 };
 

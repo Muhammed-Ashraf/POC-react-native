@@ -1,4 +1,4 @@
-import { SET_INVENTORY_LIST, SET_QUERY } from './actionTypes';
+import { SET_INVENTORY_LIST, SET_QUERY, ADD_INVENTORY } from './actionTypes';
 import { uiStartLoading, uiStopLoading } from './index';
 
 
@@ -72,3 +72,11 @@ export const setQuery = (qry) => {
         query: qry
     };
 };
+
+export const AddInventory = (prdct) => {
+    return {
+        type: ADD_INVENTORY,
+        product: prdct
+    };
+};
+
