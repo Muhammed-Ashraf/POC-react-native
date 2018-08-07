@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         margin: 2
     },
-    descriptionContainer: {
+    listContainer: {
         // `backgroundColor` needs to be set otherwise the
         // autocomplete input will disappear on text input.
         flex: 1,

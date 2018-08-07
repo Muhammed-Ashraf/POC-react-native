@@ -10,11 +10,13 @@ import AutoCompleteExamle from '../AutoCompleteExample';
 
 import styles from './checkoutStyle';
 
-import { getTotalInventoryList, setQuery } from '../../store/actions/index';
+import { getTotalInventoryList, setQuery, addInventory, updateInventory, someAction } from '../../store/actions/index';
+
 
 const logo = require('../../assets/logo-next-billion-white.png');
 
 class CheckoutScreen extends Component {
+
 
     componentWillMount() {
         this.props.onLoadList();
@@ -25,6 +27,7 @@ class CheckoutScreen extends Component {
     }
 
     findProduct(query) {
+        console.log('query' + query);
         if (query === '') {
             console.log('no query');
             return [];
@@ -37,11 +40,40 @@ class CheckoutScreen extends Component {
         return inventoryList.filter(inventory => inventory.name.search(regex) >= 0);
     }
 
+    addItem(nme, val, unt, clr, i) {
+        console.log('inside add inventory');
+       
+
+        const alreadyAdded = this.handleCheck(nme);
+
+        if (alreadyAdded) {
+            console.log('exists');
+            // console.log(val);
+            // value = parseInt(val, 10) + 1;
+            // console.log(value);
+            // this.props.onUpdate(nme, value);
+        } else {
+            // this.props.checkoutList.push({
+            //     name: nme,
+            //     unit: unt,
+            //     value: val,
+            //     color: clr,
+            //     id: i,
+            // });
+            this.props.onAdd(nme, val, unt, clr, i);
+        }
+        this.props.onSearch('');
+    }
+
+    handleCheck(val) {
+        return this.props.checkoutList.some(item => val === item.name);
+    }
+
     renderList(inventoryTotal, inventoryList) {
         return (
             <View style={{ flex: 1 }}>
-                <InventoryTotal unit={this.props.totalUnits} value={this.props.totalValue} />
-                <InventoryList inventoryList={inventoryList} />
+                <InventoryTotal unit={this.props.checkoutUnit} value={this.props.checkoutValue} />
+                <InventoryList inventoryList={this.props.checkoutList} />
             </View >
         );
     }
@@ -49,7 +81,7 @@ class CheckoutScreen extends Component {
     render() {
         const query = this.props.query;
         console.log(query);
-        const inventoryList = this.findProduct(query);
+        const searchedList = this.findProduct(query);
         const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
         return (
             <View style={styles.container}>
@@ -63,19 +95,19 @@ class CheckoutScreen extends Component {
                         autoCapitalize="none"
                         autoCorrect={false}
                         containerStyle={styles.autocompleteContainer}
-                        data={inventoryList}
+                        data={searchedList}
                         defaultValue={query}
                         onChangeText={text => this.props.onSearch(text)}
                         placeholder="Search Product"
-                        renderItem={({ name }) => (
-                            <TouchableOpacity onPress={() => this.props.onSearch(name)}>
+                        renderItem={({ name, value, unit, color, id }) => (
+                            <TouchableOpacity onPress={() => this.addItem(name, value, unit, color, id)}>
                                 <Text style={styles.itemText}>
                                     {name}
                                 </Text>
                             </TouchableOpacity>
                         )}
                     />
-                    <View style={styles.descriptionContainer}>
+                    <View style={styles.listContainer}>
                         {this.renderList(this.props.totalUnits, this.props.inventoryList)}
                     </View>
 
@@ -93,8 +125,11 @@ class CheckoutScreen extends Component {
 const mapStateToProps = state => {
     return {
         inventoryList: state.inventoryList.inventoryList,
+        checkoutList: state.inventoryList.checkoutList,
         totalUnits: state.inventoryList.unit,
         totalValue: state.inventoryList.value,
+        checkoutUnit: state.inventoryList.checkoutUnit,
+        checkoutValue: state.inventoryList.checkoutValue,
         query: state.inventoryList.query,
         isLoading: state.ui.isLoading
     };
@@ -103,7 +138,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onLoadList: () => dispatch(getTotalInventoryList()),
-        onSearch: (query) => dispatch(setQuery(query))
+        onSearch: (query) => dispatch(setQuery(query)),
+        onAdd: (name, value, unit, color, id) => dispatch(addInventory(name, value, unit, color, id)),
+        onUpdate: (name, unit) => dispatch(updateInventory(name, unit))
     };
 };
 

@@ -1,6 +1,7 @@
-import { SET_INVENTORY_LIST, SET_QUERY, ADD_INVENTORY } from './actionTypes';
+import { SET_INVENTORY_LIST, SET_QUERY, ADD_INVENTORY, SET_CHECKOUT_LIST, UPDATE_INVENTORY } from './actionTypes';
 import { uiStartLoading, uiStopLoading } from './index';
 
+import store from '../configureStore';
 
 export const getTotalInventoryList = () => {
     return dispatch => {
@@ -73,10 +74,29 @@ export const setQuery = (qry) => {
     };
 };
 
-export const AddInventory = (prdct) => {
+export const addInventory = (nme, val, unt, clr, i) => {
     return {
         type: ADD_INVENTORY,
-        product: prdct
+        name: nme,
+        value: val,
+        unit: unt,
+        color: clr,
+        id: i
+    };
+};
+
+export const updateInventory = (nme, unt) => {
+    return {
+        type: UPDATE_INVENTORY,
+        name: nme,
+        unit: unt,
+    };
+};
+
+export const someAction = () => {
+    return {
+        type: UPDATE_INVENTORY,
+        checkoutList: store.getState().inventoryList.inventoryList,
     };
 };
 
