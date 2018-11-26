@@ -3,22 +3,24 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
 
     container: {
-        paddingTop: 20,
         flex: 1
     },
-    navItemStyle: {
-        padding: 10
+    banner: {
+        width: '100%',
+        height: 200,
+        justifyContent: 'flex-end'
     },
-    navSectionStyle: {
-        backgroundColor: 'lightgrey'
+    email: {
+        marginLeft: 16,
+        marginBottom: 16,
+        color: 'white',
     },
-    sectionHeadingStyle: {
-        paddingVertical: 10,
-        paddingHorizontal: 5
-    },
-    footerContainer: {
-        padding: 20,
-        backgroundColor: 'lightgrey'
+    profilePic: {
+        marginLeft: 16,
+        marginBottom: 8,
+        width: 85,
+        height: 85,
+        borderRadius: 85 / 2
     }
 
 });
